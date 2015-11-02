@@ -3,12 +3,12 @@ This class holds game object classes
 """
 class BaseGameObj(object):
     """Basic game object template"""
-    def __init__(self, name='', description='', getsound='', dropsound='', affects=[])
+    def __init__(self, name='', description='', getsound='', dropsound='', effects=[]):
         self.name=name
         self.description=description
         self.getsound=getsound
         self.dropsound=dropsound
-        self.affects=affects
+        self.effects=effects
 
 class Weapon(BaseGameObj):
     """Class for most weapons. If you need to add any more attributes / methods, just subclass / inherit this"""
