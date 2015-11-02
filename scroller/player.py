@@ -32,5 +32,5 @@ class Player(object):
             self.move_right()
         elif symbol == key.C:
             print self.position
-        elif symbol = key.H:
+        elif symbol == key.H:
             print "You have %d out of %d hp, (%d percent)." %(self.hp, self.max_hp, self.hp/self.max_hp*100)
