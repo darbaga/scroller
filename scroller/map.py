@@ -1,5 +1,4 @@
 from collections import defaultdict
-from tiles import Tile
 class Map(object):
     def __init__(self, default_tile, impassable_tile, min_x=0, max_x=100, min_y=0, max_y=5):
         self.min_x, self.min_y = min_x, min_y
@@ -17,3 +16,14 @@ class Map(object):
                 self._map[(i, j)]=self.default_tile
     def is_impassable(self, coordinates):
         return self.get_tile(coordinates).impassable
+
+
+class Tile(object):
+    """the most basic object in a map.
+        has a collide method which plays sound for type.
+    """
+    def __init__(self, sound, impassable=False):
+        self.sound = sound
+        self.impassable = impassable
+    def collide(self, player):
+        self.sound.play()

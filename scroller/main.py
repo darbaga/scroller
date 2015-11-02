@@ -5,7 +5,7 @@ libaudioverse.initialize()
 s = libaudioverse.Simulation()
 s.set_output_device(-1)
 
-from tiles import Tile
+from map import Tile
 from map import Map
 from player import Player
 
