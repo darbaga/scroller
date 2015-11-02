@@ -5,7 +5,7 @@ class Player(object):
         Y is position on the y axis, or up and down.
         Max hp is the maximum hp a player can have, by default that's their current hp.
     """
-    def __init__(self, map, name='bob', max_hp=100):
+    def __init__(self, map, KeyStateHandler, name='bob', max_hp=100):
         self.name=name
         self.max_hp=max_hp
         self.hp=self.max_hp
@@ -15,6 +15,8 @@ class Player(object):
         
         self.left_counter = 0
         self.right_counter = 0
+        
+        self.KeyStateHandler = KeyStateHandler
         
     def move_left(self):
         #our player has a list of position coordinates, while our map expects a tuple.
@@ -46,3 +48,7 @@ class Player(object):
         elif self.right_counter>300:
             self.move_right()
             self.right_counter = 0
+        elif self.KeyStateHandler[key.RIGHT]:
+            self.right_counter+=50
+        elif self.KeyStateHandler[key.LEFT]:
+            self.left_counter += 50
