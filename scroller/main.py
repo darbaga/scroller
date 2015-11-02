@@ -16,8 +16,13 @@ default_tile = Tile(sound=sounds.load_sound('default'))
 impassable_tile = Tile(sound=sounds.load_sound('impassable'), impassable=True)
 
 Window = pyglet.window.Window()
+
+keys = pyglet.window.key.KeyStateHandler()
+window.push_handlers(keys)
+
 map = Map(default_tile, impassable_tile)
-player = Player(map)
+
+player = Player(map, keys)
 Window.push_handlers(player)
 
 if __name__ == '__main__':
