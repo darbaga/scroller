@@ -9,9 +9,13 @@ class Player(object):
         self.name=name
         self.max_hp=max_hp
         self.hp=self.max_hp
+        
         self.map = map
         self.position = [0, 0]
-
+        
+        self.left_counter = 0
+        self.right_counter = 0
+        
     def move_left(self):
         #our player has a list of position coordinates, while our map expects a tuple.
         if self.map.is_impassable((self.position[0]-1, self.position[1])):
@@ -27,10 +31,18 @@ class Player(object):
             self.position[0]+=1
     def on_key_press(self, symbol, modifiers):
         if symbol == key.LEFT:
-            self.move_left()
+            self.left_counter+=50
         elif symbol==key.RIGHT:
-            self.move_right()
+            self.right_counter+=50
         elif symbol == key.C:
             print self.position
         elif symbol == key.H:
             print "You have %d out of %d hp, (%d percent)." %(self.hp, self.max_hp, self.hp/self.max_hp*100)
+
+    def update(self, dt):
+        if self.left_counter>300:
+            self.move_left()
+            self.left_counter = 0
+        elif self.right_counter>300:
+            self.move_right()
+            self.right_counter = 0
