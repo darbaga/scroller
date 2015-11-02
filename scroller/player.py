@@ -15,7 +15,6 @@ class Player(object):
         
         self.left_counter = 0
         self.right_counter = 0
-        
         self.KeyStateHandler = KeyStateHandler
         
     def move_left(self):
