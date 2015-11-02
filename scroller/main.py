@@ -21,4 +21,5 @@ player = Player(map)
 Window.push_handlers(player)
 
 if __name__ == '__main__':
+    pyglet.clock.schedule_interval(player.update, 1/30.0)
     pyglet.app.run()
