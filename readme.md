@@ -5,7 +5,7 @@ Binaries will be generated shortly. Presently this is still in pre-alpha stage. 
 ## development
 For running this, you will need:
 * [python 2.7](https://www.python.org/downloads/release/python-2710/)
-* [pyglet](http://www.pyglet.org/)
+* [pyglet](http://www.pyglet.org/) (avbin is not required)
 * [libaudioverse](https://github.com/camlorn/libaudioverse/)
 
 No further setup is required. Just launch main.py to get the application running.
