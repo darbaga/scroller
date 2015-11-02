@@ -5,7 +5,7 @@ class Player(object):
         Y is position on the y axis, or up and down.
         Max hp is the maximum hp a player can have, by default that's their current hp.
     """
-    def __init__(self, name='bob', max_hp=100, map):
+    def __init__(self, map, name='bob', max_hp=100):
         self.name=name
         self.max_hp=max_hp
         self.hp=self.max_hp
