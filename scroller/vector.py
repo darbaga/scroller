@@ -7,5 +7,8 @@ class Vector(object):
         return self.__class__(self.x+other.x, self.y+other.y)
     def scale(self, num):
         return self.__class__(self.x*num, self.y*num)
+        
+    def isint(self):
+        return self.x.is_integer() and self.y.is_integer()
     def __repr__(self):
         return '({}, {})'.format(self.x, self.y)
