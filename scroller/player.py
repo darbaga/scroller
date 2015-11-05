@@ -28,6 +28,8 @@ class Player(object):
         elif symbol==key.RIGHT:
             self.is_moving=True
             self.movement_direction.x=1
+        if modifiers & key.MOD_CTRL:
+            self.movement_speed=5
         elif symbol == key.C:
             print self.position
         elif symbol == key.H:
@@ -36,6 +38,8 @@ class Player(object):
     def on_key_release(self, symbol, modifiers):
         if symbol==key.LEFT or symbol==key.RIGHT:
             self.is_moving=False
+        if modifiers & key.MOD_CTRL:
+            self.movement_speed=3
     def update(self, dt):
         if self.is_moving:
             self.position=self.position+self.movement_direction.scale(self.movement_speed*dt)
