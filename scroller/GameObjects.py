@@ -4,7 +4,7 @@ This class holds game object classes
 class BaseGameObj(object):
     """Basic game object template"""
     def __init__(self, name='', description='', getsound='', dropsound='', effects=[], *args, **kwargs):
-        if name and description and getsound and dropsound  and effects:
+        if not name and description and getsound and dropsound  and effects:
             self.name, self.description = kwargs['name'], kwargs['description']
             self.getsound, self.dropsound = kwargs['getsound'], kwargs['dropsound']
             self.effects = kwargs['effects']
