@@ -40,7 +40,7 @@ class Player(object):
         if self.is_moving:
             self.position=self.position+self.movement_direction.scale(self.movement_speed*dt)
         if self.tile!=self.map.get_tile((int(self.position.x), int(self.position.y))):
-            if not self.map.get_tile((int(self.position.x), int(self.position.y))).impasable:
+            if not self.map.get_tile((int(self.position.x), int(self.position.y))).impassable:
                 self.map.get_tile((int(self.position.x), int(self.position.y))).collide(self)
                 self.tile=self.map.get_tile((int(self.position.x), int(self.position.y)))
             else:
