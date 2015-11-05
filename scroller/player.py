@@ -1,4 +1,7 @@
 from pyglet.window import key
+
+from vector import Vector
+
 class Player(object):
     """Holds player related data. 
         X is position on x axis, or left / right
@@ -11,7 +14,7 @@ class Player(object):
         self.hp=self.max_hp
         
         self.map = map
-        self.position = [0, 0]
+        self.position = Vector()
         
         self.left_counter = 0
         self.right_counter = 0
@@ -19,17 +22,17 @@ class Player(object):
         
     def move_left(self):
         #our player has a list of position coordinates, while our map expects a tuple.
-        if self.map.is_impassable((self.position[0]-1, self.position[1])):
-            self.map.get_tile((self.position[0]-1, self.position[1])).collide(self)
+        if self.map.is_impassable((self.position.x-1, self.position.y)):
+            self.map.get_tile((self.position.x-1, self.position.y)).collide(self)
         else:
-            self.map.get_tile((self.position[0]-1, self.position[1])).collide(self)
-            self.position[0]-=1
+            self.map.get_tile((self.position.x-1, self.position.y)).collide(self)
+            self.position.x-=1
     def move_right(self):
-        if self.map.is_impassable((self.position[0]+1, self.position[1])):
-            self.map.get_tile((self.position[0]+1, self.position[1])).collide(self)
+        if self.map.is_impassable((self.position.x+1, self.position.y)):
+            self.map.get_tile((self.position.x+1, self.position.y)).collide(self)
         else:
-            self.map.get_tile((self.position[0]+1, self.position[1])).collide(self)
-            self.position[0]+=1
+            self.map.get_tile((self.position.x+1, self.position.y)).collide(self)
+            self.position.x+=1
     def on_key_press(self, symbol, modifiers):
         if symbol == key.LEFT:
             self.left_counter+=50
