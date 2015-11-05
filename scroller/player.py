@@ -51,3 +51,5 @@ class Player(object):
                 self.map.get_tile((int(self.position.x), int(self.position.y))).collide(self)
         if not self.is_moving and self.position.x<int(self.position.x)+.5:
             self.position.x=int(self.position.x)+.5
+        if self.position.x>self.map.max_x:
+            self.position.x=self.map.max_x
