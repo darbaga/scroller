@@ -22,10 +22,10 @@ class Player(object):
         self.movement_speed=3.0
         
     def on_key_press(self, symbol, modifiers):
-        if symbol == key.LEFT:
+        if symbol == key.LEFT and not int(self.position.x)<self.map.min_x:
             self.is_moving=True
             self.movement_direction.x=-1
-        elif symbol==key.RIGHT:
+        elif symbol==key.RIGHT and not int(self.position.x+1)>self.map.max_x:
             self.is_moving=True
             self.movement_direction.x=1
         if modifiers & key.MOD_CTRL:
