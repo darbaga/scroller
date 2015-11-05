@@ -13,7 +13,7 @@ class Map(object):
         #if we just use max.
         for i in xrange(self.min_x, self.max_x+1):
             for j in xrange(self.min_y, self.max_y+1):
-                self._map[(i, j)]=self.default_tile
+                self._map[(i, j)]=self.default_tile()
     def is_impassable(self, coordinates):
         return self.get_tile(coordinates).impassable
 
