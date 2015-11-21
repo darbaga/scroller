@@ -17,39 +17,32 @@ class Player(object):
         self.position = Vector()
         self.tile=self.map.get_tile((int(self.position.x), int(self.position.y)))
         
-        self.is_moving=False
-        self.movement_direction=Vector()
-        self.movement_speed=3.0
-        
+        self.has_moved=False
+        #(how many times the loop loops/how much tiles the player should be able to cover in a second)=
+        self.move_counter=15
     def on_key_press(self, symbol, modifiers):
-        if symbol == key.LEFT and not int(self.position.x)<self.map.min_x:
-            self.is_moving=True
-            self.movement_direction.x=-1
-        elif symbol==key.RIGHT and not int(self.position.x+1)>self.map.max_x:
-            self.is_moving=True
-            self.movement_direction.x=1
-        if modifiers & key.MOD_CTRL:
-            self.movement_speed=5
+        if symbol == key.LEFT and self.move_counter==0:
+            self.position.x-=1
+            self.has_moved=True
+        elif symbol==key.RIGHT and self.move_counter==0:
+            self.position.x+=1
+            self.has_moved=True
         elif symbol == key.C:
             print(self.position)
         elif symbol == key.H:
             print("You have %d out of %d hp, (%d percent)." %(self.hp, self.max_hp, self.hp/self.max_hp*100))
-            
-    def on_key_release(self, symbol, modifiers):
-        if symbol==key.LEFT or symbol==key.RIGHT:
-            self.is_moving=False
-        if modifiers & key.MOD_CTRL:
-            self.movement_speed=3
+        if symbol==key.M:
+            print(self.move_counter)
+
     def update(self, dt):
-        if self.is_moving:
-            self.position=self.position+self.movement_direction.scale(self.movement_speed*dt)
+        if self.has_moved:
+            self.has_moved=False
+            self.move_counter=15
+        if self.move_counter>0:
+            self.move_counter-=1
         if self.tile!=self.map.get_tile((int(self.position.x), int(self.position.y))):
-            if not self.map.get_tile((int(self.position.x), int(self.position.y))).impassable:
+            if self.map.get_tile((int(self.position.x), int(self.position.y))).impassable:
                 self.map.get_tile((int(self.position.x), int(self.position.y))).collide(self)
-                self.tile=self.map.get_tile((int(self.position.x), int(self.position.y)))
             else:
                 self.map.get_tile((int(self.position.x), int(self.position.y))).collide(self)
-        if not self.is_moving and self.position.x<int(self.position.x)+.5:
-            self.position.x=int(self.position.x)+.5
-        if self.position.x>self.map.max_x:
-            self.position.x=self.map.max_x
+                self.tile=self.map.get_tile((int(self.position.x), int(self.position.y)))
