@@ -31,9 +31,9 @@ class Player(object):
         if modifiers & key.MOD_CTRL:
             self.movement_speed=5
         elif symbol == key.C:
-            print self.position
+            print(self.position)
         elif symbol == key.H:
-            print "You have %d out of %d hp, (%d percent)." %(self.hp, self.max_hp, self.hp/self.max_hp*100)
+            print("You have %d out of %d hp, (%d percent)." %(self.hp, self.max_hp, self.hp/self.max_hp*100))
             
     def on_key_release(self, symbol, modifiers):
         if symbol==key.LEFT or symbol==key.RIGHT:
