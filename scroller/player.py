@@ -20,12 +20,18 @@ class Player(object):
         self.has_moved=False
         #(how many times the loop loops/how much tiles the player should be able to cover in a second)=
         self.move_counter=15
+        
+    def move(self, x, y):
+        if self.map.get_tile((self.position.x+x, self.position.y+y)).impassable:
+            self.map.get_tile((self.position.x+x, self.position.y+y)).collide(self)
+        else:
+            self.position=Vector(self.position.x+x, self.position.y+y)
     def on_key_press(self, symbol, modifiers):
         if symbol == key.LEFT and self.move_counter==0:
-            self.position.x-=1
+            self.move(-1, 0)
             self.has_moved=True
         elif symbol==key.RIGHT and self.move_counter==0:
-            self.position.x+=1
+            self.move(1, 0)
             self.has_moved=True
         elif symbol == key.C:
             print(self.position)
@@ -41,8 +47,5 @@ class Player(object):
         if self.move_counter>0:
             self.move_counter-=1
         if self.tile!=self.map.get_tile((int(self.position.x), int(self.position.y))):
-            if self.map.get_tile((int(self.position.x), int(self.position.y))).impassable:
-                self.map.get_tile((int(self.position.x), int(self.position.y))).collide(self)
-            else:
-                self.map.get_tile((int(self.position.x), int(self.position.y))).collide(self)
-                self.tile=self.map.get_tile((int(self.position.x), int(self.position.y)))
+            self.map.get_tile((int(self.position.x), int(self.position.y))).collide(self)
+            self.tile=self.map.get_tile((int(self.position.x), int(self.position.y)))
