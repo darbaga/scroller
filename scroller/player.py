@@ -1,3 +1,5 @@
+import pdb
+
 from pyglet.window import key
 
 from vector import Vector
@@ -16,6 +18,8 @@ class Player(object):
         self.map = map
         self.position = Vector()
         self.tile=self.map.get_tile((int(self.position.x), int(self.position.y)))
+        
+        self.KeyStateHandler=KeyStateHandler
         
         self.has_moved=False
         #(how many times the loop loops/how much tiles the player should be able to cover in a second)=
@@ -39,6 +43,8 @@ class Player(object):
             print("You have %d out of %d hp, (%d percent)." %(self.hp, self.max_hp, self.hp/self.max_hp*100))
         if symbol==key.M:
             print(self.move_counter)
+        if symbol==key.P:
+            pdb.set_trace()
 
     def update(self, dt):
         if self.has_moved:
@@ -49,3 +55,9 @@ class Player(object):
         if self.tile!=self.map.get_tile((int(self.position.x), int(self.position.y))):
             self.map.get_tile((int(self.position.x), int(self.position.y))).collide(self)
             self.tile=self.map.get_tile((int(self.position.x), int(self.position.y)))
+        if self.KeyStateHandler.get(key.RIGHT, None)==True and self.move_counter==0:
+            self.move(1, 0)
+            self.has_moved=True
+        if self.KeyStateHandler.get(key.LEFT, None)==True and self.move_counter==0:
+            self.move(-1, 0)
+            self.has_moved=True
